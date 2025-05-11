@@ -1,0 +1,120 @@
+set nocompatible
+
+let mapleader=","
+let maplocalleader=","
+
+" Autoinstall vim-plu
+
+filetype off
+call plug#begin()
+
+" -----------------------------------------------
+" Appearance
+Plug 'andreasvc/vim-256noir'
+
+" -----------------------------------------------
+" clever-f
+
+Plug 'rhysd/clever-f.vim'
+    let g:clever_f_across_no_line = 1
+
+" -----------------------------------------------
+" t-comment
+
+Plug 'tomtom/tcomment_vim'
+
+" ------------------------------------------------
+" easymotion
+Plug 'easymotion/vim-easymotion'	
+
+	" <Leader>f{char} to move to {char}
+	map  <Leader>f <Plug>(easymotion-bd-f)
+	nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+	map <Leader>L <Plug>(easymotion-bd-jk)
+	nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+	map  <Leader>w <Plug>(easymotion-bd-w)
+	nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+" ------------------------------------------------
+" fzf
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+
+	let g:fzf_nvim_statusline = 0
+
+	nnoremap <silent> <leader><space> :Files<CR>
+	nnoremap <silent> <leader>a :Buffers<CR>
+	nnoremap <silent> <leader>; :BLines<CR>
+	nnoremap <silent> <leader>gl :Commits<CR>
+	nnoremap <silent> <leader>ga :BCommits<CR>
+
+	imap <c-x><c-k> <plug>(fzf-complete-word)
+	imap <c-x><c-f> <plug>(fzf-complete-path)
+	imap <c-x><c-l> <plug>(fzf-complete-line)
+
+call plug#end()
+
+
+syntax enable
+filetype plugin indent on
+
+set shiftwidth=4
+set expandtab
+set tabstop=4
+
+set display+=lastline
+set scrolloff=2
+set showcmd
+set sidescroll=1
+set smoothscroll
+set ttyfast
+set background=dark
+
+" Satatus line
+
+set laststatus=2
+set showcmd
+set showmode
+
+" Title
+
+set titlestring=%t\ -\ Vim
+
+" Line Numbers
+
+set number
+set relativenumber
+set nuw=6
+
+" Search
+
+set hlsearch
+set incsearch
+set showmatch
+set smartcase
+set ignorecase
+nnoremap <ESC> :noh<CR>
+
+" BIDNINGS 
+
+" Quick reload config file
+
+noremap <leader>ev :e $MYVIMRC<CR>
+noremap <leader>sv :so $MYVIMRC<CR>
+
+" Save as sudo
+
+cmap w!! w !sudo tee > /dev/null %
+
+" Colorscheme
+
+set t_Co=256
+
+colorscheme 256_noir
+
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+autocmd InsertEnter * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=234 guifg=NONE guibg=#1c1c1c
+autocmd InsertLeave * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
