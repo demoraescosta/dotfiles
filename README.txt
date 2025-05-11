@@ -1,2 +1,1 @@
-# dotfiles
-Personal (shareable) Dotfiles
+Personal, (hopefully) platform agnostic custom dotfiles.
