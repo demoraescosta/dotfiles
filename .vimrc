@@ -3,62 +3,59 @@ set nocompatible
 let mapleader=","
 let maplocalleader=","
 
-" Autoinstall vim-plu
-
 filetype off
+
+" ------------------------------------------------
+" PLUGINS
+
 call plug#begin()
 
-" -----------------------------------------------
-" Appearance
-Plug 'andreasvc/vim-256noir'
+    Plug 'andreasvc/vim-256noir'
 
-" -----------------------------------------------
-" clever-f
+    " clever-f
 
-Plug 'rhysd/clever-f.vim'
-    let g:clever_f_across_no_line = 1
+    Plug 'rhysd/clever-f.vim'
+        let g:clever_f_across_no_line = 1
 
-" -----------------------------------------------
-" t-comment
+    " t-comment
 
-Plug 'tomtom/tcomment_vim'
+    Plug 'tomtom/tcomment_vim'
 
-" ------------------------------------------------
-" easymotion
-Plug 'easymotion/vim-easymotion'	
+    " easymotion
+    Plug 'easymotion/vim-easymotion'	
 
-	" <Leader>f{char} to move to {char}
-	map  <Leader>f <Plug>(easymotion-bd-f)
-	nmap <Leader>f <Plug>(easymotion-overwin-f)
+        " <Leader>f{char} to move to {char}
+        map  <Leader>f <Plug>(easymotion-bd-f)
+        nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-	map <Leader>L <Plug>(easymotion-bd-jk)
-	nmap <Leader>L <Plug>(easymotion-overwin-line)
+        map <Leader>L <Plug>(easymotion-bd-jk)
+        nmap <Leader>L <Plug>(easymotion-overwin-line)
 
-	map  <Leader>w <Plug>(easymotion-bd-w)
-	nmap <Leader>w <Plug>(easymotion-overwin-w)
+        map  <Leader>w <Plug>(easymotion-bd-w)
+        nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-" ------------------------------------------------
-" fzf
+    " fzf
 
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
-	let g:fzf_nvim_statusline = 0
+        let g:fzf_nvim_statusline = 0
 
-	nnoremap <silent> <leader><space> :Files<CR>
-	nnoremap <silent> <leader>a :Buffers<CR>
-	nnoremap <silent> <leader>; :BLines<CR>
-	nnoremap <silent> <leader>gl :Commits<CR>
-	nnoremap <silent> <leader>ga :BCommits<CR>
+        nnoremap <silent> <leader><space> :Files<CR>
+        nnoremap <silent> <leader>a :Buffers<CR>
+        nnoremap <silent> <leader>; :BLines<CR>
+        nnoremap <silent> <leader>gl :Commits<CR>
+        nnoremap <silent> <leader>ga :BCommits<CR>
 
-	imap <c-x><c-k> <plug>(fzf-complete-word)
-	imap <c-x><c-f> <plug>(fzf-complete-path)
-	imap <c-x><c-l> <plug>(fzf-complete-line)
+        imap <c-x><c-k> <plug>(fzf-complete-word)
+        imap <c-x><c-f> <plug>(fzf-complete-path)
+        imap <c-x><c-l> <plug>(fzf-complete-line)
 
 call plug#end()
 
+" ------------------------------------------------
+" OPTIONS
 
-syntax enable
 filetype plugin indent on
 
 set shiftwidth=4
@@ -73,7 +70,7 @@ set smoothscroll
 set ttyfast
 set background=dark
 
-" Satatus line
+" Status line
 
 set laststatus=2
 set showcmd
@@ -98,7 +95,8 @@ set smartcase
 set ignorecase
 nnoremap <ESC> :noh<CR>
 
-" BIDNINGS 
+" ------------------------------------------------
+" BINDINGS 
 
 " Quick reload config file
 
@@ -111,6 +109,7 @@ cmap w!! w !sudo tee > /dev/null %
 
 " Colorscheme
 
+syntax enable
 set t_Co=256
 
 colorscheme 256_noir
