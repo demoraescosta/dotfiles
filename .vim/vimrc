@@ -24,6 +24,7 @@ call plug#begin()
     Plug 'tomtom/tcomment_vim'
 
     " easymotion
+    
     Plug 'easymotion/vim-easymotion'	
 
         " <Leader>f{char} to move to {char}
