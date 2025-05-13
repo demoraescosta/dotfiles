@@ -23,9 +23,15 @@ call plug#begin()
 
     Plug 'tomtom/tcomment_vim'
 
+    " fugitive-vim
+
+    Plug 'tpope/vim-fugitive'
+
     " easymotion
     
-    Plug 'easymotion/vim-easymotion'	
+        Plug 'easymotion/vim-easymotion'	
+
+        let g:EasyMotion_smartcase = 1
 
         " <Leader>f{char} to move to {char}
         map  <Leader>f <Plug>(easymotion-bd-f)
@@ -37,18 +43,23 @@ call plug#begin()
         map  <Leader>w <Plug>(easymotion-bd-w)
         nmap <Leader>w <Plug>(easymotion-overwin-w)
 
+        noremap  / <Plug>(easymotion-sn)
+        onoremap / <Plug>(easymotion-tn)
+        noremap  n <Plug>(easymotion-next)
+        noremap  N <Plug>(easymotion-prev)
+
+
     " fzf
 
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
     Plug 'junegunn/fzf.vim'
 
         let g:fzf_nvim_statusline = 0
-
-        nnoremap <silent> <leader><space> :Files<CR>
-        nnoremap <silent> <leader>a :Buffers<CR>
-        nnoremap <silent> <leader>; :BLines<CR>
-        nnoremap <silent> <leader>gl :Commits<CR>
-        nnoremap <silent> <leader>ga :BCommits<CR>
+        nnoremap <silent> <leader><space> :Files<cr>
+        nnoremap <silent> <leader>a :Buffers<cr>
+        nnoremap <silent> <leader>; :BLines<cr>
+        nnoremap <silent> <leader>gl :Commits<cr>
+        nnoremap <silent> <leader>ga :BCommits<cr>
 
         imap <c-x><c-k> <plug>(fzf-complete-word)
         imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -59,7 +70,7 @@ call plug#begin()
     Plug 'francoiscabrol/ranger.vim'
 
         let g:ranger_map_keys = 0
-        nnoremap <silent> <leader>r :Ranger<CR>
+        nnoremap <silent> <leader>r :Ranger<cr>
 
 call plug#end()
 
@@ -79,6 +90,8 @@ set sidescroll=1
 set smoothscroll
 set ttyfast
 set background=dark
+
+set nowrap
 
 " Status line
 
@@ -103,7 +116,8 @@ set incsearch
 set showmatch
 set smartcase
 set ignorecase
-nnoremap <ESC> :noh<CR>
+
+nnoremap <silent> <esc> :noh<return><esc>
 
 " Disable Matching Paren
 
@@ -113,12 +127,16 @@ nnoremap <ESC> :noh<CR>
 
 " Quick reload config file
 
-noremap <leader>ev :e $MYVIMRC<CR>
-noremap <leader>sv :so $MYVIMRC<CR>
+noremap <leader>ev :e $MYVIMRC<cr>
+noremap <leader>sv :so $MYVIMRC<cr>
 
 " Save as sudo
 
 cmap w!! w !sudo tee > /dev/null %
+
+" Normal mode in terminal window
+
+" tnoremap <leader><ESC> <C-\\><C-n>
 
 " Colorscheme
 
