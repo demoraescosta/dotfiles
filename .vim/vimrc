@@ -12,6 +12,7 @@ filetype off
 
 call plug#begin()
 
+    " vim 256noir colorscheme
     Plug 'andreasvc/vim-256noir'
 
     " clever-f
@@ -29,7 +30,7 @@ call plug#begin()
 
     " easymotion
     
-        Plug 'easymotion/vim-easymotion'	
+    Plug 'easymotion/vim-easymotion'	
 
         let g:EasyMotion_smartcase = 1
 
@@ -47,7 +48,6 @@ call plug#begin()
         onoremap / <Plug>(easymotion-tn)
         noremap  n <Plug>(easymotion-next)
         noremap  N <Plug>(easymotion-prev)
-
 
     " fzf
 
@@ -72,6 +72,25 @@ call plug#begin()
         let g:ranger_map_keys = 0
         nnoremap <silent> <leader>r :Ranger<cr>
 
+    " vim multiple cursors 
+    
+    Plug 'terryma/vim-multiple-cursors'
+
+        let g:multi_cursor_use_default_mapping=0
+        let g:multi_cursor_exit_from_visual_mode=1
+
+        let g:multi_cursor_start_word_key      = '<C-n>'
+        let g:multi_cursor_select_all_word_key = '<A-n>'
+        let g:multi_cursor_start_key           = 'g<C-n>'
+        let g:multi_cursor_select_all_key      = 'g<A-n>'
+        let g:multi_cursor_next_key            = '<C-n>'
+        let g:multi_cursor_prev_key            = '<C-p>'
+        let g:multi_cursor_skip_key            = '<C-x>'
+        let g:multi_cursor_quit_key            = '<Esc>'
+
+    " vim tmux navigator
+    Plug 'christoomey/vim-tmux-navigator'
+        
 call plug#end()
 
 " ------------------------------------------------
@@ -90,7 +109,7 @@ set sidescroll=1
 set smoothscroll
 set ttyfast
 set background=dark
-
+set mouse=a
 set nowrap
 
 " Status line
@@ -117,11 +136,12 @@ set showmatch
 set smartcase
 set ignorecase
 
-nnoremap <silent> <esc> :noh<return><esc>
+nnoremap <silent> <esc> :noh<cr><esc>
 
 " Disable Matching Paren
 
-    let c_no_curly_error=1
+let c_no_curly_error=1
+
 " ------------------------------------------------
 " BINDINGS 
 
@@ -134,11 +154,13 @@ noremap <leader>sv :so $MYVIMRC<cr>
 
 cmap w!! w !sudo tee > /dev/null %
 
-" Normal mode in terminal window
+map <Up> <Nop>
+map <Left> <Nop>
+map <Right> <Nop>
+map <Down> <Nop>
 
-" tnoremap <leader><ESC> <C-\\><C-n>
-
-" Colorscheme
+" -----------------------------------------------
+" COLORSCHEME
 
 syntax enable
 set t_Co=256
@@ -148,3 +170,37 @@ colorscheme 256_noir
 highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
 autocmd InsertEnter * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=234 guifg=NONE guibg=#1c1c1c
 autocmd InsertLeave * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+
+" -----------------------------------------------
+" FUNCTIONS
+
+function! MakeSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    
+    if (filewritable(b:sessiondir) != 2)
+        exe 'silent !mkdir -p ' b:sessiondir
+        redraw!
+    endif
+
+    let b:filename = b:sessiondir . '/session.vim'
+    exe "mksession! " . b:filename
+endfunction
+
+function! LoadSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    let b:sessionfile = b:sessiondir . "/session.vim"
+
+    if (filereadable(b:sessionfile))
+        exe 'source ' b:sessionfile
+    else
+        echo "No session loaded."
+    endif
+endfunction
+
+if(argc() == 0)
+  au VimEnter * nested :call LoadSession()
+endif
+
+au VimLeave * :call MakeSession()
+
+
