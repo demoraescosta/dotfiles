@@ -3,7 +3,9 @@ set nocompatible
 let mapleader=","
 let maplocalleader=","
 
-set shell=bash
+if has('unix')
+    set shell=bash
+endif
 
 filetype off
 
@@ -60,6 +62,7 @@ call plug#begin()
         nnoremap <silent> <leader>; :BLines<cr>
         nnoremap <silent> <leader>gl :Commits<cr>
         nnoremap <silent> <leader>ga :BCommits<cr>
+        nnoremap <silent> <leader>rg :RG<cr>
 
         imap <c-x><c-k> <plug>(fzf-complete-word)
         imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -80,7 +83,7 @@ call plug#begin()
         let g:multi_cursor_exit_from_visual_mode=1
 
         let g:multi_cursor_start_word_key      = '<C-n>'
-        let g:multi_cursor_select_all_word_key = '<A-n>'
+        let g:multi_cursor_select_all_word_key = '<lA-n>'
         let g:multi_cursor_start_key           = 'g<C-n>'
         let g:multi_cursor_select_all_key      = 'g<A-n>'
         let g:multi_cursor_next_key            = '<C-n>'
