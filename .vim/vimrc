@@ -1,99 +1,99 @@
 set nocompatible
 
 let mapleader=","
-    let maplocalleader=","
+let maplocalleader=","
 
-    set shell=bash
+set shell=bash
 
-    filetype off
+filetype off
 
-    " ------------------------------------------------
-    " PLUGINS
+" ------------------------------------------------
+" PLUGINS
 
-    call plug#begin()
+call plug#begin()
 
-        " vim 256noir colorscheme
-        Plug 'andreasvc/vim-256noir'
+    " vim 256noir colorscheme
+    Plug 'andreasvc/vim-256noir'
 
-        " clever-f
+    " clever-f
 
-        Plug 'rhysd/clever-f.vim'
-            let g:clever_f_across_no_line = 1
+    Plug 'rhysd/clever-f.vim'
+        let g:clever_f_across_no_line = 1
 
-        " t-comment
+    " t-comment
 
-        Plug 'tomtom/tcomment_vim'
+    Plug 'tomtom/tcomment_vim'
 
-        " fugitive-vim
+    " fugitive-vim
 
-        Plug 'tpope/vim-fugitive'
+    Plug 'tpope/vim-fugitive'
 
-        " easymotion
-        
-        Plug 'easymotion/vim-easymotion'    
+    " easymotion
+    
+    Plug 'easymotion/vim-easymotion'    
 
-            let g:EasyMotion_smartcase = 1
+        let g:EasyMotion_smartcase = 1
 
-            " <Leader>f{char} to move to {char}
-            map  <Leader>f <Plug>(easymotion-bd-f)
-            nmap <Leader>f <Plug>(easymotion-overwin-f)
+        " <Leader>f{char} to move to {char}
+        map  <Leader>f <Plug>(easymotion-bd-f)
+        nmap <Leader>f <Plug>(easymotion-overwin-f)
 
-            map <Leader>L <Plug>(easymotion-bd-jk)
-            nmap <Leader>L <Plug>(easymotion-overwin-line)
+        map <Leader>L <Plug>(easymotion-bd-jk)
+        nmap <Leader>L <Plug>(easymotion-overwin-line)
 
-            map  <Leader>w <Plug>(easymotion-bd-w)
-            nmap <Leader>w <Plug>(easymotion-overwin-w)
+        map  <Leader>w <Plug>(easymotion-bd-w)
+        nmap <Leader>w <Plug>(easymotion-overwin-w)
 
-            noremap  / <Plug>(easymotion-sn)
-            onoremap / <Plug>(easymotion-tn)
-            noremap  n <Plug>(easymotion-next)
-            noremap  N <Plug>(easymotion-prev)
+        noremap  / <Plug>(easymotion-sn)
+        onoremap / <Plug>(easymotion-tn)
+        noremap  n <Plug>(easymotion-next)
+        noremap  N <Plug>(easymotion-prev)
 
-        " fzf
+    " fzf
 
-        Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-        Plug 'junegunn/fzf.vim'
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
 
-            let g:fzf_nvim_statusline = 0
-            nnoremap <silent> <leader><space> :Files<cr>
-            nnoremap <silent> <leader>a :Buffers<cr>
-            nnoremap <silent> <leader>; :BLines<cr>
-            nnoremap <silent> <leader>gl :Commits<cr>
-            nnoremap <silent> <leader>ga :BCommits<cr>
-            nnoremap <silent> <leader>rg :RG<cr>
+        let g:fzf_nvim_statusline = 0
+        nnoremap <silent> <leader><space> :Files<cr>
+        nnoremap <silent> <leader>a :Buffers<cr>
+        nnoremap <silent> <leader>; :BLines<cr>
+        nnoremap <silent> <leader>gl :Commits<cr>
+        nnoremap <silent> <leader>ga :BCommits<cr>
+        nnoremap <silent> <leader>rg :RG<cr>
 
-            imap <c-x><c-k> <plug>(fzf-complete-word)
-            imap <c-x><c-f> <plug>(fzf-complete-path)
-            imap <c-x><c-l> <plug>(fzf-complete-line)
+        imap <c-x><c-k> <plug>(fzf-complete-word)
+        imap <c-x><c-f> <plug>(fzf-complete-path)
+        imap <c-x><c-l> <plug>(fzf-complete-line)
 
-        " ranger
-        
-        Plug 'francoiscabrol/ranger.vim'
+    " ranger
+    
+    Plug 'francoiscabrol/ranger.vim'
 
-            let g:ranger_map_keys = 0
-            nnoremap <silent> <leader>r :Ranger<cr>
+        let g:ranger_map_keys = 0
+        nnoremap <silent> <leader>r :Ranger<cr>
 
-        " vim multiple cursors 
-        
-        Plug 'terryma/vim-multiple-cursors'
+    " vim multiple cursors 
+    
+    Plug 'terryma/vim-multiple-cursors'
 
-            let g:multi_cursor_use_default_mapping=0
-            let g:multi_cursor_exit_from_visual_mode=1
+        let g:multi_cursor_use_default_mapping=0
+        let g:multi_cursor_exit_from_visual_mode=1
 
-            let g:multi_cursor_start_word_key      = '<C-n>'
-            let g:multi_cursor_select_all_word_key = '<lA-n>'
-            let g:multi_cursor_start_key           = 'g<C-n>'
-            let g:multi_cursor_select_all_key      = 'g<A-n>'
-            let g:multi_cursor_next_key            = '<C-n>'
-            let g:multi_cursor_prev_key            = '<C-p>'
-            let g:multi_cursor_skip_key            = '<C-x>'
-            let g:multi_cursor_quit_key            = '<Esc>'
+        let g:multi_cursor_start_word_key      = '<C-n>'
+        let g:multi_cursor_select_all_word_key = '<lA-n>'
+        let g:multi_cursor_start_key           = 'g<C-n>'
+        let g:multi_cursor_select_all_key      = 'g<A-n>'
+        let g:multi_cursor_next_key            = '<C-n>'
+        let g:multi_cursor_prev_key            = '<C-p>'
+        let g:multi_cursor_skip_key            = '<C-x>'
+        let g:multi_cursor_quit_key            = '<Esc>'
 
-        " vim tmux navigator
+    " vim tmux navigator
 
-        Plug 'christoomey/vim-tmux-navigator'
-           
-        " git-blame
+    Plug 'christoomey/vim-tmux-navigator'
+       
+    " git-blame
     Plug 'zivyangll/git-blame.vim'
         nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
         
