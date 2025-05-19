@@ -94,9 +94,19 @@ call plug#begin()
     Plug 'christoomey/vim-tmux-navigator'
        
     " git-blame
+    
     Plug 'zivyangll/git-blame.vim'
+
         nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
-        
+    
+    " easy align
+    
+     Plug 'junegunn/vim-easy-align'
+
+        xmap ga <Plug>(EasyAlign)
+        nmap ga <Plug>(EasyAlign)
+
+
 call plug#end()
 
 " ------------------------------------------------
@@ -107,7 +117,7 @@ filetype plugin indent on
 set shiftwidth=4
 set expandtab
 set tabstop=4
-
+set autoindent
 set display+=lastline
 set scrolloff=3
 set ruler
@@ -119,6 +129,7 @@ set background=dark
 set mouse=a
 set nowrap
 set backspace=indent,eol,start
+set noswapfile
 
 " Status line
 
@@ -149,6 +160,14 @@ nnoremap <silent> <esc> :noh<cr><esc>
 " Disable Matching Paren
 
 let c_no_curly_error=1
+
+" enable mouse with tmux
+
+set mouse+=a
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
 
 " ------------------------------------------------
 " BINDINGS 
