@@ -3,9 +3,9 @@ set nocompatible
 let mapleader=","
 let maplocalleader=","
 
-set shell=bash
+    set shell=bash
 
-filetype off
+    filetype off
 
 " ------------------------------------------------
 " PLUGINS
@@ -57,21 +57,17 @@ call plug#begin()
         let g:fzf_nvim_statusline = 0
         nnoremap <silent> <leader><space> :Files<cr>
         nnoremap <silent> <leader>a :Buffers<cr>
-        nnoremap <silent> <leader>; :BLines<cr>
+        nnoremap <silent> <leader>l :BLines<cr>
         nnoremap <silent> <leader>gl :Commits<cr>
         nnoremap <silent> <leader>ga :BCommits<cr>
         nnoremap <silent> <leader>rg :RG<cr>
-
-        imap <c-x><c-k> <plug>(fzf-complete-word)
-        imap <c-x><c-f> <plug>(fzf-complete-path)
-        imap <c-x><c-l> <plug>(fzf-complete-line)
-
+   
     " ranger
     
     Plug 'francoiscabrol/ranger.vim'
 
         let g:ranger_map_keys = 0
-        nnoremap <silent> <leader>r :Ranger<cr>
+        nnoremap <silent> <leader>r :Ranger<cr>'mcchrish/nnn.vim'
 
     " vim multiple cursors 
     
