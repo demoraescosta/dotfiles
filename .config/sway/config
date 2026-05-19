@@ -1,0 +1,225 @@
+include /etc/sway/config.d/*
+include ~/.config/sway/settings
+
+exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP=sway
+
+exec_always {
+    gsettings set org.gnome.desktop.interface gtk-theme $gtk_theme
+    gsettings set org.gnome.desktop.interface icon-theme $icon_theme
+    gsettings set org.gnome.desktop.interface font-name $font-alt
+    gsettings set org.gnome.desktop.interface monospace-font-name $monospace_font
+    gsettings set org.gnome.desktop.wm.preferences button-layout ':'
+    gsettings set org.gnome.desktop.interface cursor-theme $cursor_theme
+    gsettings set org.gnome.desktop.interface cursor-size $cursor_size
+
+    flatpak override --user --env=GTK_THEME=$gtk_theme
+    flatpak override --user --env=ICON_THEME=$icon_theme
+}
+seat seat0 xcursor_theme $cursor_theme $cursor_size
+
+output DP-1 resolution 2560x1440@165hz adaptive_sync on allow_tearing yes render_bit_depth 8 hdr off bg $wallpaper tile
+
+# INPUT CONFIGURATION
+input type:keyboard {
+    xkb_layout "br"
+}
+
+input type:pointer {
+    accel_profile "flat"
+}
+
+bindsym $mod+Return       exec $term
+bindsym $mod+Shift+Return exec $web
+bindsym $mod+p            exec $menu
+bindsym $mod+Shift+q      kill
+bindsym $mod+Shift+s      exec $HOME/bin/sys-menu
+
+floating_modifier $mod normal
+
+# Reload the configuration file
+bindsym $mod+Shift+r reload
+
+# Exit sway (logs you out of your Wayland session)
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+
+# Move your focus around
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+
+# Move the focused window with the same, but add Shift
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+
+# Workspaces:
+bindsym $mod+1 workspace number 1
+bindsym $mod+2 workspace number 2
+bindsym $mod+3 workspace number 3
+bindsym $mod+4 workspace number 4
+bindsym $mod+5 workspace number 5
+bindsym $mod+6 workspace number 6
+bindsym $mod+7 workspace number 7
+bindsym $mod+8 workspace number 8
+bindsym $mod+9 workspace number 9
+bindsym $mod+0 workspace number 10
+
+bindsym $mod+Shift workspace number 10
+
+# Move focused container to workspace
+bindsym $mod+Shift+1 move container to workspace number 1
+bindsym $mod+Shift+2 move container to workspace number 2
+bindsym $mod+Shift+3 move container to workspace number 3
+bindsym $mod+Shift+4 move container to workspace number 4
+bindsym $mod+Shift+5 move container to workspace number 5
+bindsym $mod+Shift+6 move container to workspace number 6
+bindsym $mod+Shift+7 move container to workspace number 7
+bindsym $mod+Shift+8 move container to workspace number 8
+bindsym $mod+Shift+9 move container to workspace number 9
+
+bindsym Shift+Mod1+a workspace 10:steam
+bindsym Shift+Mod1+s workspace 11:spotify
+bindsym Shift+Mod1+d workspace 12:discord
+bindsym Shift+Mod1+f workspace 13:rmpc
+
+# Layout stuff:
+#
+# You can "split" the current object of your focus with
+# $mod+b or $mod+v, for horizontal and vertical splits
+# respectively.
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+# Switch the current container between different layout styles
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+# Make the current focus fullscreen
+bindsym $mod+f fullscreen
+
+# Toggle the current focus between tiling and floating mode
+bindsym $mod+Shift+space floating toggle
+
+# Swap focus between the tiling area and the floating area
+bindsym $mod+space focus mode_toggle
+
+# Move focus to the parent container
+bindsym $mod+a focus parent
+
+# Move the currently focused window to the scratchpad
+bindsym $mod+apostrophe scratchpad show
+bindsym $mod+Shift+apostrophe move scratchpad
+
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
+
+bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
+bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
+bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
+bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
+# Special key to take a screenshot with grim
+bindsym Print exec grim -  | tee "$HOME/images/screenshots"/"$(date +%Y-%m-%d-%H-%M-%S)_grim.png" | wl-copy
+bindsym Shift+Print exec wayfreeze --after-freeze-cmd 'grim -g "$(slurp)" - | wl-copy; killall wayfreeze'
+
+# BAR
+
+bar {
+    position top
+
+    swaybar_command waybar
+    
+    # icon_theme $icon_theme
+
+    colors {
+        statusline $fg
+        background $bg
+        inactive_workspace $bg $bg-alt $bg
+        focused_workspace  $accent $accent $bg
+        urgent_workspace   $bg $bg $accent 
+    }
+}
+# WINDOW COLORS
+# class                 border  backgr. text    indicator child_border
+client.focused          $accent $accent $bg     $accent-alt $accent
+client.focused_inactive $bg     $bg     $fg     $bg         $bg
+client.unfocused        $bg-alt $bg     $fg     $bg         $bg-alt
+client.urgent           $bg     $bg     $fg     $bg         $bg
+client.placeholder      $bg     $bg     $fg     $bg         $bg
+
+client.background       $bg
+
+
+# TITLE BAR
+
+title_align center
+
+# WINDOW DECORATIONS
+gaps inner 10
+gaps outer 10
+gaps horizontal 20
+gaps top 5
+gaps bottom 5
+
+default_border pixel 2
+default_floating_border pixel 2
+smart_borders on
+
+font $font
+
+# FLOATING RULES
+for_window [window_type="dialog"] floating enable
+for_window [window_role="dialog"] floating enable
+for_window [app_id="clipse"] floating enable, move position center, resize set 80ppt 80ppt # style window to look nice
+
+for_window [app_id="firefox"] inhibit_idle visible
+
+# AUTOSTART
+exec_always {
+    pidof dunst || dunst
+}
+
+exec clipse -listen
+exec wl-clip-persist --clipboard regular
+
+bindsym $mod+Shift+v exec kitty --class clipse -e clipse                               # bind floating shell with clipse TUI
+
+# APPLICATIONS
+
+exec swaymsg 'workspace 1; exec /usr/bin/firefox'
+
+assign [class="steam"] 10:steam
+assign [app_id="spotify"] 11:spotify
+assign [class="discord"] 12:discord
+assign [app_id="rmpc"] 13:rmpc
+
+exec spotify-launcher
+exec discord
+exec steam
+exec swaymsg 'exec kitty --class "rmpc" -e rmpc'
+
+for_window [instance="Steam"] floating enable
+
+# SWAYIDLE
+
+exec_always swayidle -w \
+    timeout 300 'swaylock -f -c 000000' \
+    timeout 350 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'playerctl pause' \
+    before-sleep 'swaylock -f -c 000000'
+
+include /etc/sway/config.d/*

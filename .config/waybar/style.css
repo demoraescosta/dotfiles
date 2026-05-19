@@ -1,0 +1,83 @@
+@import url('file:///home/andre/.cache/wal/colors-waybar.css');
+
+@define-color accent #d1a26d;
+@define-color fg #cdc5b5;
+@define-color bg #000000;
+@define-color bg-alt #333333;
+
+* {
+    /* all: initial; */
+    font-weight: normal;
+    min-width: 16px;
+    font-size: 16px;
+    font-family: "Terminess Nerd Font Mono";
+    min-height: 0;
+}
+
+window#waybar {
+    background-color: @bg;
+}
+
+#custom-separator {
+    color: @bg-alt
+}
+
+#mode {
+    font-weight: bold;
+    color: @accent;
+}
+
+#pulseaudio,
+#memory,
+#cpu {
+    color: @fg;
+    margin-right: 8px;
+}
+
+button {
+    min-height: 24px;
+}
+
+#workspaces {
+    /* border-bottom: 2px solid @accent; */
+}
+
+#workspaces button {
+    padding: 8px 4px 8px 4px;
+    color: @fg;
+    min-width: 0;
+    background-color: @bg;
+    border: none;
+}
+
+#workspaces button:hover {
+    background: none;
+    border: none;
+    border-color: transparent;
+    transition: none;
+}
+
+#workspaces button.focused {
+    border-radius: 0;
+    /* border-bottom: 2px solid @fg; */
+    background: @accent;
+    color: @bg;
+}
+
+#mpris {
+    color: @accent;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+#tray {
+    font-family: "Ubuntu";
+    padding-right: 5px;
+    padding-left: 10px;
+}
+
+#clock {
+    color: @fg;
+    font-weight: bold;
+    margin-right: 8px;
+}

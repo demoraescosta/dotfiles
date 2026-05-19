@@ -1,0 +1,26 @@
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+
+set $term kitty
+set $menu 'rofi -show drun -i -soting-method fzf'
+set $web 'flatpak run io.gitlab.librewolf-community'
+set $file_browser 'kitty -e yazi'
+
+set $wallpaper "$HOME/images/wallpapers/tiling/sweet_myrtle_tile.png"
+
+set $accent     #d1a26d
+set $accent-alt #A28962
+set $bg         #000000
+set $bg-alt     #252525
+set $fg         #cdc5b5
+
+set $cursor_theme "Adwaita"
+set $cursor_size 24
+
+set $font "Terminess Nerd Font 12"
+set $monospace-font "Terminess Nerd Font 12"
+set $font-alt "Ubuntu 12"

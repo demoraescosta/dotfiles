@@ -1,0 +1,240 @@
+set nocompatible
+
+let mapleader=","
+let maplocalleader=","
+
+set shell=bash
+
+filetype off
+
+" ------------------------------------------------
+" PLUGINS
+
+call plug#begin()
+
+    " vim 256noir colorscheme
+   
+    Plug 'andreasvc/vim-256noir'
+
+    " clever-f
+
+    Plug 'rhysd/clever-f.vim'
+        let g:clever_f_across_no_line = 1
+
+    " t-comment
+
+    Plug 'tomtom/tcomment_vim'
+
+    " fugitive-vim
+
+    Plug 'tpope/vim-fugitive'
+
+    " easymotion
+    
+    Plug 'easymotion/vim-easymotion'    
+
+        let g:EasyMotion_smartcase = 1
+
+        " <Leader>f{char} to move to {char}
+        map  <Leader>f <Plug>(easymotion-bd-f)
+        nmap <Leader>f <Plug>(easymotion-overwin-f)
+
+        map <Leader>L <Plug>(easymotion-bd-jk)
+        nmap <Leader>L <Plug>(easymotion-overwin-line)
+
+        map  <Leader>w <Plug>(easymotion-bd-w)
+        nmap <Leader>w <Plug>(easymotion-overwin-w)
+
+        noremap  / <Plug>(easymotion-sn)
+        onoremap / <Plug>(easymotion-tn)
+        noremap  n <Plug>(easymotion-next)
+        noremap  N <Plug>(easymotion-prev)
+
+    " fzf
+
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+
+        let g:fzf_nvim_statusline = 0
+        nnoremap <silent> <leader><space> :Files<cr>
+        nnoremap <silent> <leader>a :Buffers<cr>
+        nnoremap <silent> <leader>l :BLines<cr>
+        nnoremap <silent> <leader>gl :Commits<cr>
+        nnoremap <silent> <leader>ga :BCommits<cr>
+        nnoremap <silent> <leader>rg :RG<cr>
+   
+
+    " vim multiple cursors 
+    
+    Plug 'terryma/vim-multiple-cursors'
+
+        let g:multi_cursor_use_default_mapping=0
+        let g:multi_cursor_exit_from_visual_mode=1
+
+        let g:multi_cursor_start_word_key      = '<C-n>'
+        let g:multi_cursor_select_all_word_key = '<lA-n>'
+        let g:multi_cursor_start_key           = 'g<C-n>'
+        let g:multi_cursor_select_all_key      = 'g<A-n>'
+        let g:multi_cursor_next_key            = '<C-n>'
+        let g:multi_cursor_prev_key            = '<C-p>'
+        let g:multi_cursor_skip_key            = '<C-x>'
+        let g:multi_cursor_quit_key            = '<Esc>'
+
+    " vim tmux navigator
+
+    Plug 'christoomey/vim-tmux-navigator'
+       
+    " git-blame
+    
+    Plug 'zivyangll/git-blame.vim'
+
+        nnoremap <Leader>b :<C-u>call gitblame#echo()<CR>
+    
+    " easy align
+    
+     Plug 'junegunn/vim-easy-align'
+
+        xmap ga <Plug>(EasyAlign)
+        nmap ga <Plug>(EasyAlign)
+
+
+call plug#end()
+
+" ------------------------------------------------
+" OPTIONS
+
+filetype plugin indent on
+
+set shiftwidth=4
+set expandtab
+set tabstop=4
+set autoindent
+set display+=lastline
+set scrolloff=3
+set ruler
+set showcmd
+set sidescroll=1
+set smoothscroll
+set ttyfast
+set background=dark
+set mouse=v
+set nowrap
+set backspace=indent,eol,start
+set noswapfile
+
+" Clipboard
+
+set clipboard=unnamedplus
+noremap <leader>y "+y
+
+" Status line
+
+set laststatus=2
+set showcmd
+set showmode
+
+" Title
+
+set titlestring=%t\ -\ Vim
+
+" Line Numbers
+
+set number
+set relativenumber
+set nuw=6
+
+" Search
+
+set hlsearch
+set incsearch
+set showmatch
+set smartcase
+set ignorecase
+
+nnoremap <silent> <esc> :noh<cr><esc>
+
+" Disable Matching Paren
+
+let c_no_curly_error=1
+
+" enable mouse with tmux
+
+set mouse+=a
+if &term =~ '^screen'
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+endif
+
+" Undo
+
+if !isdirectory($HOME."/.vim")
+    call mkdir($HOME."/.vim", "", 0770)
+endif
+if !isdirectory($HOME."/.vim/undodir")
+    call mkdir($HOME."/.vim/undodir", "", 0700)
+endif
+
+set undodir=~/.vim/undodir
+set undofile
+
+" ------------------------------------------------
+" BINDINGS 
+
+" Quick reload config file
+
+noremap <leader>sv :e $MYVIMRC<cr>
+noremap <leader>ev :so $MYVIMRC<cr>
+
+" Save as sudo
+
+cmap w!! w !sudo tee > /dev/null %
+
+map <Up> <Nop>
+map <Left> <Nop>
+map <Right> <Nop>
+map <Down> <Nop>
+
+" -----------------------------------------------
+" COLORSCHEME
+
+syntax enable
+set t_Co=256
+
+colorscheme 256_noir
+
+highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+autocmd InsertEnter * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=234 guifg=NONE guibg=#1c1c1c
+autocmd InsertLeave * highlight CursorLine cterm=NONE ctermfg=NONE ctermbg=233 guifg=NONE guibg=#121212
+
+" -----------------------------------------------
+" FUNCTIONS
+
+function! MakeSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    
+    if (filewritable(b:sessiondir) != 2)
+        exe 'silent !mkdir -p ' b:sessiondir
+        redraw!
+    endif
+
+    let b:filename = b:sessiondir . '/session.vim'
+    exe "mksession! " . b:filename
+endfunction
+
+function! LoadSession()
+    let b:sessiondir = $HOME . "/.vim/sessions" . getcwd()
+    let b:sessionfile = b:sessiondir . "/session.vim"
+
+    if (filereadable(b:sessionfile))
+        exe 'source ' b:sessionfile
+    else
+        echo "No session loaded."
+    endif
+endfunction
+
+if(argc() == 0)
+  au VimEnter * nested :call LoadSession()
+endif
+
+au VimLeave * :call MakeSession()
+

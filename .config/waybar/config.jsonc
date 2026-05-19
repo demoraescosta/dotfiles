@@ -1,0 +1,59 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 40,
+    "spacing": 8,
+    "margin-left": 30,
+    "margin-right": 30,
+    "margin-top": 15,
+    "modules-left": ["sway/workspaces","sway/mode"],
+    "modules-center": ["mpris"],
+    "modules-right": ["tray", "custom/separator", "cpu", "memory", "pulseaudio", "custom/separator", "clock"],
+
+    "custom/separator": {
+        "format": "//"
+    },
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "format": "{name}",
+        "format-icons": {
+        }
+    },
+
+    "sway/mode": {
+        "format": "[{}]"
+    },
+
+    "mpris": {
+        "format": "{artist} - {title}"
+    },
+    
+    "tray": {
+        "icon-size": 20,
+        "spacing": 7,
+        "tooltip": false
+    },
+
+    "pulseaudio": {
+        "format": "<span color='#D1A26D'><b>vol:</b></span> {volume}%",
+        "format-muted": "<span color='#D1A26D'><b>vol:</b></span> {volume}% (m)",
+        "min-length": 7
+    },
+
+    "cpu": {
+        "format": "<span color='#D1A26D'><b>cpu:</b></span> {usage}%",
+        "min-length": 7
+    },
+
+    "memory": {
+        "format": "<span color='#D1A26D'><b>mem:</b></span> {percentage}%",
+        "min-length": 7
+    },
+
+    "clock": {
+        "interval": 1,
+        "format": "{:%H:%M:%S %Y-%m-%d}",
+        "tooltip": false
+    }
+}
