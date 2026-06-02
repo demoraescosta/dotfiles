@@ -53,10 +53,10 @@ alias -- ls='exa --group-directories-first'
 alias -- l='ls -l --sort=extension'
 alias -- ll='ls -la --sort=extension --git'
 alias -- wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias -- sv='sudoedit'
 
 # shorthands
 alias -- v=nvim
-alias -- h=helix
 
 # utilities
 alias -- wttr='curl wttr.in/rio'
