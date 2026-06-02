@@ -3,23 +3,22 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
     -- COLORSCHEMES
-    Plug('demoraescosta/blonde.nvim')
 
     -- fzf
     Plug('junegunn/fzf')
     Plug('junegunn/fzf.vim')
 
-    -- -- treesitter
-    -- Plug('nvim-treesitter/nvim-treesitter')
-
     -- auto-session
     Plug('rmagatti/auto-session')
+
+    
 
 vim.call('plug#end')
 
 ----------------------------------------
 --- Options
-require('blonde').load()
+
+vim.cmd('colorscheme blonde')
 
 vim.g.mapleader = ","
 vim.g.maplocalleader = ","
@@ -48,25 +47,6 @@ vim.opt.ignorecase = true
 vim.opt.undofile = true
 
 vim.opt.mouse = 'a'
-
--- require'nvim-treesitter.configs'.setup {
---   -- A list of parser names, or "all" (the listed parsers MUST always be installed)
---   ensure_installed = { 
---       "c", 
---       "go", 
---       "haskell", 
---       "rust", 
---       "lua", 
---       "vim", 
---       "vimdoc", 
---       "markdown", 
---       "markdown_inline" 
---   },
---
---   highlight = {
---       enable = true
---   }
--- }
 
 require("auto-session").setup {
     supressed_dirs = {

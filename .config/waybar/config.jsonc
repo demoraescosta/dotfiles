@@ -1,14 +1,15 @@
 {
     "layer": "top",
     "position": "top",
-    "height": 40,
+    "height": 24,
     "spacing": 8,
-    "margin-left": 30,
-    "margin-right": 30,
+    "margin-left": 600,
+    "margin-right": 600,
     "margin-top": 15,
     "modules-left": ["sway/workspaces","sway/mode"],
     "modules-center": ["mpris"],
-    "modules-right": ["tray", "custom/separator", "cpu", "memory", "pulseaudio", "custom/separator", "clock"],
+    "modules-right": ["cpu", "memory", "pulseaudio", "custom/separator", "clock"],
+    "modules-right": ["pulseaudio", "custom/separator", "clock"],
 
     "custom/separator": {
         "format": "//"
@@ -26,18 +27,19 @@
     },
 
     "mpris": {
+        "max-length": 45,
         "format": "{artist} - {title}"
     },
     
-    "tray": {
-        "icon-size": 20,
-        "spacing": 7,
-        "tooltip": false
-    },
+    // "tray": {
+    //     "icon-size": 18,
+    //     "spacing": 7,
+    //     "tooltip": false
+    // },
 
     "pulseaudio": {
-        "format": "<span color='#D1A26D'><b>vol:</b></span> {volume}%",
-        "format-muted": "<span color='#D1A26D'><b>vol:</b></span> {volume}% (m)",
+        "format": "<b>vol:</b> {volume}%",
+        "format-muted": "<b>vol:</b> {volume}% (m)",
         "min-length": 7
     },
 
@@ -53,7 +55,7 @@
 
     "clock": {
         "interval": 1,
-        "format": "{:%H:%M:%S %Y-%m-%d}",
+        "format": "{:%Y-%m-%d %H:%M:%S}",
         "tooltip": false
     }
 }

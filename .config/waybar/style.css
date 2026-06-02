@@ -1,21 +1,24 @@
 @import url('file:///home/andre/.cache/wal/colors-waybar.css');
 
-@define-color accent #d1a26d;
-@define-color fg #cdc5b5;
-@define-color bg #000000;
-@define-color bg-alt #333333;
+@define-color accent #a68866;
+@define-color accent-alt #5d2e10;
+@define-color fg #3d2f20;
+@define-color bg #f5efe5;
+@define-color bg-alt #bab3a7;
 
 * {
-    /* all: initial; */
+    all: initial;
     font-weight: normal;
-    min-width: 16px;
-    font-size: 16px;
-    font-family: "Terminess Nerd Font Mono";
+    /* min-width: 16px; */
+    font-size: 11pt;
+    font-family: "GoMono Nerd Font";
     min-height: 0;
+    color: @fg;
 }
 
 window#waybar {
     background-color: @bg;
+    border: 4px solid @fg;
 }
 
 #custom-separator {
@@ -31,7 +34,6 @@ window#waybar {
 #memory,
 #cpu {
     color: @fg;
-    margin-right: 8px;
 }
 
 button {
@@ -39,7 +41,11 @@ button {
 }
 
 #workspaces {
-    /* border-bottom: 2px solid @accent; */
+    border: 4px solid @fg;
+    border-right: none;
+    border-left: none;
+    margin-left: 20px;
+    /* border: none; */
 }
 
 #workspaces button {
@@ -47,37 +53,31 @@ button {
     color: @fg;
     min-width: 0;
     background-color: @bg;
-    border: none;
+    /* border: none; */
 }
 
 #workspaces button:hover {
     background: none;
-    border: none;
-    border-color: transparent;
+    /* border: none; */
+    /* border-color: transparent; */
     transition: none;
 }
 
 #workspaces button.focused {
-    border-radius: 0;
-    /* border-bottom: 2px solid @fg; */
+    /* border-radius: 0; */
     background: @accent;
+}
+
+#workspaces button.focused label {
     color: @bg;
 }
 
 #mpris {
-    color: @accent;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-#tray {
-    font-family: "Ubuntu";
-    padding-right: 5px;
-    padding-left: 10px;
+    color: @fg;
+    font-size: 12pt;
 }
 
 #clock {
     color: @fg;
-    font-weight: bold;
-    margin-right: 8px;
+    margin-right: 20px;
 }

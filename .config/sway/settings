@@ -10,15 +10,16 @@ set $menu 'rofi -show drun -i -soting-method fzf'
 set $web 'flatpak run io.gitlab.librewolf-community'
 set $file_browser 'kitty -e yazi'
 
-set $wallpaper "$HOME/images/wallpapers/tiling/sweet_myrtle_tile.png"
+set $wallpaper "$HOME/images/wallpapers/tiling/flowers-alt-2.png"
 
-set $accent     #d1a26d
+
+set $accent     #a68866
 set $accent-alt #A28962
-set $bg         #000000
-set $bg-alt     #252525
+set $bg         #3d2f20
+set $bg-alt     #352525
 set $fg         #cdc5b5
 
-set $cursor_theme "Adwaita"
+set $cursor_theme "plan9"
 set $cursor_size 24
 
 set $font "Terminess Nerd Font 12"
