@@ -48,12 +48,12 @@ bindkey '5~' kill-word
 # ALIASES & FUNCTIONS
 
 # wokeifying the coreutils
-alias -- cat=bat
-alias -- ls='exa --group-directories-first'
+alias -- ls='ls -p --group-directories-first'
 alias -- l='ls -l --sort=extension'
-alias -- ll='ls -la --sort=extension --git'
+alias -- ll='ls -la --sort=extension'
 alias -- wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias -- sv='sudoedit'
+alias -- grep='grep --color'
 
 # shorthands
 alias -- v=nvim
@@ -93,11 +93,12 @@ setopt PROMPT_SP
 PROMPT_EOL_MARK=$''
 
 # PROMPT='%F{gray}%~%f %F{red}${vcs_info_msg_0_}%f$ '
-PROMPT='%B%F{green}[%*]%f%b %B%F{yellow}%n%f%b%B%F{blue}@%f%b%F{cyan}%M%f %F{blue}%2~%f %B%F{red}${vcs_info_msg_0_}%f%b$ '
+# PROMPT='%B%F{green}[%*]%f%b %B%F{yellow}%n%f%b%B%F{blue}@%f%b%F{cyan}%M%f %F{blue}%2~%f %B%F{red}${vcs_info_msg_0_}%f%b$ '
+PROMPT='%3~%f %% '
 
 # -------------------------------------------------------------------------------- 
 # PLUGINS
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # -------------------------------------------------------------------------------- 
 # LF IMAGE PREVIEW

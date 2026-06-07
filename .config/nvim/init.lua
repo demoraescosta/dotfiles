@@ -2,11 +2,9 @@ local vim = vim
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin')
-    -- COLORSCHEMES
-
-    -- fzf
-    Plug('junegunn/fzf')
-    Plug('junegunn/fzf.vim')
+    -- telescope
+    Plug('nvim-lua/plenary.nvim')
+    Plug('nvim-telescope/telescope.nvim')
 
     -- auto-session
     Plug('rmagatti/auto-session')
@@ -55,6 +53,10 @@ require("auto-session").setup {
     }
 }
 
+require('telescope').setup {
+
+}
+
 ----------------------------------------
 -- KEYMAPS
 
@@ -64,10 +66,13 @@ end
 
 map('n', '<esc>', '<cmd>noh<cr>')
 
--- fzf + grep
-map('n', '<leader><space>', '<cmd>Files<cr>')
-map('n', '<leader>l',       '<cmd>BLines<cr>')
-map('n', '<leader>g',       '<cmd>Rg<cr>')
+-- telescope
+
+local builtin = require('telescope.builtin')
+map("n", "<leader><space>", builtin.find_files, {})
+map("n", "<leader>g", builtin.live_grep, {})
+map("n", "<leader>b", builtin.buffers, {})
+map("n", "<leader>f", builtin.grep_string, {})
 
 -- window stuff
 map("n", "<C-h>", "<C-w>h")
